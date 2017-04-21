@@ -12,6 +12,9 @@ gameEvent
     })
   })
   .then(events_per_inning => {
+    Object.keys(events_per_inning).forEach(inning => {
+      events_per_inning[inning].unshift(`<h5>inning ${Number(inning) + 1}</h5>`)
+    });
     return events_per_inning.reduce((events, event) => {
       return events.concat(event)
     }, []);
