@@ -1,10 +1,10 @@
 $(document).ready(function() {
   const month = '04';
-  const day = '15';
+  const day = '22';
   const year = '2017';
   const mets = 'nynmlb';
-  const opponent = 'miamlb';
-  const metsHome = false;
+  const opponent = 'wasmlb';
+  const metsHome = true;
   const fullDate = `${year}_${month}_${day}`;
 
   const url = metsHome ?
@@ -25,8 +25,8 @@ $(document).ready(function() {
             var opposingTeam = data.data.boxscore.away_fname;
             $('.score').html(`
               <div>Final score</div>
-              <div>New York Mets: ${data.data.boxscore.linescore.home_team_runs}</div>
               <div>${data.data.boxscore.away_fname}: ${data.data.boxscore.linescore.away_team_runs}</div>
+              <div>New York Mets: ${data.data.boxscore.linescore.home_team_runs}</div>
             `)
           }
           else if (bottomOrTop === 'top') {
