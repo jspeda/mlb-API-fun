@@ -1,14 +1,19 @@
 $(document).ready(function() {
   const month = '04';
-  const day = '21';
+  const day = '15';
   const year = '2017';
   const mets = 'nynmlb';
-  const opponent = 'wasmlb';
+  const opponent = 'miamlb';
+  const metsHome = false;
   const fullDate = `${year}_${month}_${day}`;
+
+  const url = metsHome ?
+    `http://gd2.mlb.com/components/game/mlb/year_${year}/month_${month}/day_${day}/gid_${fullDate}_${opponent}_${mets}_1` :
+    `http://gd2.mlb.com/components/game/mlb/year_${year}/month_${month}/day_${day}/gid_${fullDate}_${mets}_${opponent}_1`
 
   // NOTE: THIS ONLY CURRENTLY WORKS FOR METS HOME GAMES DUE TO URL STRUCTURE - SHOULD BE AN EASY FIX
 
-  const boxScore = fetch(`http://gd2.mlb.com/components/game/mlb/year_${year}/month_${month}/day_${day}/gid_${fullDate}_${opponent}_${mets}_1/boxscore.json`)
+  const boxScore = fetch(`${url}/boxscore.json`)
   let bottomOrTop;
     boxScore
       .then(data => data.json())
@@ -38,7 +43,7 @@ $(document).ready(function() {
       })
       .catch(err => console.error(err));
 
-  const gameEvent = fetch(`http://gd2.mlb.com/components/game/mlb/year_${year}/month_${month}/day_${day}/gid_${fullDate}_${opponent}_${mets}_1/game_events.json`)
+  const gameEvent = fetch(`${url}/game_events.json`)
   gameEvent
     .then(data => data.json())
     .then(data => data.data.game.inning.map(e => e[bottomOrTop].atbat))
