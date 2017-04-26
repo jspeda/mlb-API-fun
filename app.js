@@ -1,10 +1,10 @@
 $(document).ready(function() {
   const month = '04';
-  const day = '22';
+  const day = '11';
   const year = '2017';
   const mets = 'nynmlb';
-  const opponent = 'wasmlb';
-  const metsHome = true;
+  const opponent = 'phimlb';
+  const metsHome = false;
   const fullDate = `${year}_${month}_${day}`;
 
   const url = metsHome ?
@@ -64,9 +64,13 @@ $(document).ready(function() {
     })
     .then(events => {
       console.log('events', events)
-      let strikeouts = events.filter(e => {
-        if (e === "Strikeout") return true;
+      let homer = events.filter(e => {
+        if (e.includes('homers')) return true;
       })
+      console.log(homer);
+      // homer.map(e => {
+      //   $('.list').append(`<div class="batter-events">${e}</div>`)
+      // })
       events.map(e => {
         $('.list').append(`<div class="batter-events">${e}</div>`);
       })
